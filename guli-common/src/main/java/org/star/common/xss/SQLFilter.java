@@ -8,8 +8,8 @@
 
 package org.star.common.xss;
 
-import io.renren.common.exception.RRException;
 import org.apache.commons.lang.StringUtils;
+import org.star.common.utils.RRException;
 
 /**
  * SQL过滤
