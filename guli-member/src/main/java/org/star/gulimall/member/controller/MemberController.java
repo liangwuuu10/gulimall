@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import org.star.gulimall.member.entity.MemberEntity;
+import org.star.gulimall.member.feign.CouponFeignService;
 import org.star.gulimall.member.service.MemberService;
 import org.star.common.utils.PageUtils;
 import org.star.common.utils.R;
@@ -29,6 +30,23 @@ import org.star.common.utils.R;
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+    @Autowired
+    private CouponFeignService couponFeignService;
+
+    /**
+     * 测试open feign远程调用的接口
+     */
+    @RequestMapping("/coupons")
+    public R test() {
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("Sean");
+
+        R memberCoupons = couponFeignService.memberCoupons();
+        Object coupons = memberCoupons.get("coupons");
+
+        return R.ok().put("memberName", memberEntity.getNickname()).put("coupon", coupons);
+    }
 
     /**
      * 列表

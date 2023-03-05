@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+    gateway:
+      routes:
+        - id: go_route
+          uri: https://www.google.com
+          predicates:
+            - Query=url, go
+        - id: qq_route
+          uri: https://www.netflix.com
+          predicates:
+            - Query=url, net
+
+  application:
+    name: gulimall-gateway
+
+server:
+  port: 88
